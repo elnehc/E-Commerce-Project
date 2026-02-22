@@ -3,11 +3,11 @@ CREATE TABLE users (
     first_name varchar(50) NOT NULL,
     last_name varchar(50) NOT NULL,
     email varchar(255) NOT NULL UNIQUE,
-    phone_number varchar(20) NOT NULL,
+    phone_number varchar(20) NOT NULL UNIQUE,
     address varchar(255) NOT NULL
 );
 
-CREATE TABLE customer_orders (
+CREATE TABLE orders (
     order_id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
     order_number varchar(50) NOT NULL UNIQUE,
     user_id int NOT NULL,
@@ -33,6 +33,6 @@ CREATE TABLE order_items (
     product_id int NOT NULL,
     quantity int NOT NULL,
     unit_price decimal(10, 2) NOT NULL,
-    FOREIGN KEY (order_id) REFERENCES customer_orders(order_id),
+    FOREIGN KEY (order_id) REFERENCES orders(order_id),
     FOREIGN KEY (product_id) REFERENCES products(product_id)
 );
