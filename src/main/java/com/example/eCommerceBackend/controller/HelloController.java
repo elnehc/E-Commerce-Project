@@ -1,4 +1,4 @@
-package com.example.demo.controller;// src/main/java/com/example/demo/HelloController.java
+package com.example.eCommerceBackend.controller;// src/main/java/com/example/demo/HelloController.java
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
