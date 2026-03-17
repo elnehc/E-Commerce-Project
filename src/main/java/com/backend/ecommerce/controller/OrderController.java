@@ -1,14 +1,17 @@
 package com.backend.ecommerce.controller;
 
 import com.backend.ecommerce.entity.Order;
+import com.backend.ecommerce.entity.OrderItem;
+import com.backend.ecommerce.entity.OrderStatus;
 import com.backend.ecommerce.service.OrderService;
 
 import org.springframework.http.MediaType;
 
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.util.List;
+import java.time.LocalDate;
 
 @RestController
 @RequestMapping("/api/orders")
@@ -19,9 +22,27 @@ public class OrderController {
         this.orderService = orderService;
     }
 
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<Order> getOrders(
+        @RequestParam(required = false) String orderNumber,
+        @RequestParam(required = false) OrderStatus status,
+        @RequestParam(required = false) 
+        @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate from,
+        @RequestParam(required = false)
+        @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate to
+    ) {
+        return orderService.getOrders(orderNumber, status, from, to);
+    }
+
     @GetMapping(value = "/{orderId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public Order getOrderById(@PathVariable Integer orderId) {
         return orderService.getOrderById(orderId);
     }
+
+    @GetMapping(value = "/{orderId}/items", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<OrderItem> getItemsByOrderId(@PathVariable Integer orderId) {
+        return orderService.getOrderItemsByOrderId(orderId);
+    }
+
 
 }
