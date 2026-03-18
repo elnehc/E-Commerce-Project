@@ -31,9 +31,10 @@ public class OrderController {
         @RequestParam(required = false)
         @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate to,
         @RequestParam(required = false) String brand,
-        @RequestParam(required = false) String name
+        @RequestParam(required = false) String name,
+        @RequestParam(required = false) String category
     ) {
-        return orderService.getOrders(orderNumber, status, from, to, brand, name);
+        return orderService.getOrders(orderNumber, status, from, to, brand, name, category);
     }
 
     @GetMapping(value = "/{orderId}", produces = MediaType.APPLICATION_JSON_VALUE)

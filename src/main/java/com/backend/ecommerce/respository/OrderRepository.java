@@ -30,7 +30,7 @@ public interface OrderRepository extends JpaRepository<Order, Integer> {
         join oi.product p
         where lower(p.brand) like lower(concat('%', :brand, '%'))
         """)
-    List<Order> findOrderByBrand(@Param("brand") String brand);
+    List<Order> findOrderByProductBrand(@Param("brand") String brand);
 
     @Query("""
         select distinct o from Order o
@@ -39,5 +39,13 @@ public interface OrderRepository extends JpaRepository<Order, Integer> {
         where lower(p.name) like lower(concat('%', :name, '%'))
         """)
     List<Order> findOrderByProductName(@Param("name") String name);
+
+    @Query("""
+            select distinct o from Order o
+            join OrderItem oi on oi.order = o
+            join oi.product p
+            where lower(p.category) like lower(concat('%', :category, '%'))
+            """)
+    List<Order> findOrderByProductCategory(@Param("category") String category);
 }
     

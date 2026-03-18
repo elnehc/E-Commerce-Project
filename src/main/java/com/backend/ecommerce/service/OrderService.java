@@ -27,7 +27,8 @@ public class OrderService {
                                 LocalDate from, 
                                 LocalDate to,
                                 String brand,
-                                String productName) {
+                                String productName,
+                                String category) {
         if (orderNumber != null) {
             return orderRepository.findByOrderNumber(orderNumber);
         }
@@ -37,7 +38,11 @@ public class OrderService {
         }
 
         if (brand != null) {
-            return orderRepository.findOrderByBrand(brand);
+            return orderRepository.findOrderByProductBrand(brand);
+        }
+        
+        if (category != null) {
+            return orderRepository.findOrderByProductCategory(category);
         }
 
         if (status != null && from != null && to!= null){
