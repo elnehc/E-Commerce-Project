@@ -1,4 +1,4 @@
-package com.backend.ecommerce.respository;
+package com.backend.ecommerce.repository;
 
 import com.backend.ecommerce.entity.Order;
 import com.backend.ecommerce.entity.OrderStatus;

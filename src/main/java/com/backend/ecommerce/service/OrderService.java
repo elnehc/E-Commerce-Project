@@ -3,8 +3,9 @@ package com.backend.ecommerce.service;
 import com.backend.ecommerce.entity.Order;
 import com.backend.ecommerce.entity.OrderItem;
 import com.backend.ecommerce.entity.OrderStatus;
-import com.backend.ecommerce.respository.OrderItemRepository;
-import com.backend.ecommerce.respository.OrderRepository;
+import com.backend.ecommerce.repository.OrderItemRepository;
+import com.backend.ecommerce.repository.OrderRepository;
+
 import org.springframework.stereotype.Service;
 
 import java.util.List;
