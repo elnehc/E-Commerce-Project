@@ -22,9 +22,22 @@ public class OrderService {
         this.orderItemRepository = orderItemRepository;
     }
 
-    public List<Order> getOrders(String orderNumber, OrderStatus status, LocalDate from, LocalDate to) {
+    public List<Order> getOrders(String orderNumber, 
+                                OrderStatus status, 
+                                LocalDate from, 
+                                LocalDate to,
+                                String brand,
+                                String productName) {
         if (orderNumber != null) {
             return orderRepository.findByOrderNumber(orderNumber);
+        }
+
+        if (productName != null) {
+            return orderRepository.findOrderByProductName(productName);
+        }
+
+        if (brand != null) {
+            return orderRepository.findOrderByBrand(brand);
         }
 
         if (status != null && from != null && to!= null){
