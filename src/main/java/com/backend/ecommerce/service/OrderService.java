@@ -5,6 +5,7 @@ import com.backend.ecommerce.entity.OrderItem;
 import com.backend.ecommerce.entity.OrderStatus;
 import com.backend.ecommerce.repository.OrderItemRepository;
 import com.backend.ecommerce.repository.OrderRepository;
+import com.backend.ecommerce.exception.ResourceNotFoundException;
 
 import org.springframework.stereotype.Service;
 
@@ -63,10 +64,11 @@ public class OrderService {
 
     public Order getOrderById(Integer orderId) {
         return orderRepository.findById(orderId)
-                .orElseThrow(() -> new RuntimeException("Order not found with id: " + orderId));
+                .orElseThrow(() -> new ResourceNotFoundException("Order not found with id: " + orderId));
     }
 
     public List<OrderItem> getOrderItemsByOrderId(Integer orderId) {
+        getOrderById(orderId);  // check if order exists, will throw if not found
         return orderItemRepository.findByOrderOrderId(orderId);
     }
 
